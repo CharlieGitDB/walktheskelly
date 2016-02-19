@@ -1,0 +1,102 @@
+alias walktheskelly='mkdir client; touch client/client.js; mkdir server; mkdir server/public; mkdir server/public/scripts; mkdir server/public/views; mkdir server/public/vendors; mkdir server/public/styles; mkdir server/routes; echo "var express = require("\""express"\"");
+var router = express.Router();
+var path = require("\""path"\"");
+
+
+router.use("\""/"\"", express.static(path.join(__dirname, "\""../public"\"")));
+router.get("\""/"\"", function(request,response){
+  response.sendFile(path.join(__dirname, "\""../public/views/index.html"\""));
+});
+module.exports = router;" >server/routes/index.js; echo "var express = require("\""express"\"");
+var path = require("\""path"\"");
+var index = require("\""./routes/index"\"");
+var bodyParser = require("\""body-parser"\"");
+var app = express();
+
+app.use(bodyParser.json());
+app.use("\""/"\"", index);
+
+var server = app.listen(3000, function(){
+    var port = server.address().port;
+    console.log("\""Listening on port: "\"", port);
+});" >server.js; echo "<!DOCTYPE html>
+<html lang="\""en"\"">
+<head>
+  <meta charset="\""UTF-8"\"">
+  <title>Document</title>
+  <script src="\""scripts/client.min.js"\""></script>
+</head>
+<body>
+
+</body>
+</html>" >server/public/views/index.html; npm init; echo "module.exports = function(grunt) {
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("\""package.json"\""),
+        uglify: {
+            build: {
+                src: "\""client/client.js"\"",
+                dest: "\""server/public/scripts/client.min.js"\""
+            }
+        },
+        watch: {
+    			scripts: {
+    				files: ["\""client/client.js"\""],
+    				tasks: ["\""uglify"\""],
+    				options: {
+    					spawn: false
+    				}
+    			}
+    		},
+        copy: {
+            main: {
+                expand: true,
+                cwd: "\""node_modules/"\"",
+                src: [
+                    "\""angular/angular.min.js"\"",
+                    "\""angular/angular.min.js.map"\"",
+                    "\""angular/angular-csp.css"\""
+                ],
+                "\""dest"\"": "\""server/public/vendors/"\""
+            }
+        }
+    });
+
+    grunt.loadNpmTasks("\""grunt-contrib-copy"\"");
+    grunt.loadNpmTasks("\""grunt-contrib-uglify"\"");
+    grunt.loadNpmTasks("\""grunt-contrib-watch"\"");
+
+    // Default task(s).
+    grunt.registerTask("\""default"\"", ["\""copy"\"", "\""uglify"\"", "\""watch"\""]);
+
+};" >Gruntfile.js; mv server.js server; echo "node_modules
+readme" >".gitignore"; echo "{
+  "\""name"\"": "\""tempname"\"",
+  "\""version"\"": "\""0.0.0"\"",
+  "\""description"\"": "\"""\"",
+  "\""main"\"": "\""server/server.js"\"",
+  "\""scripts"\"": {
+    "\""test"\"": "\""echo '\''error no test found'\'' exit 1"\"",
+    "\""start"\"": "\""nodemon server/server.js"\""
+  },
+  "\""author"\"": "\"""\"",
+  "\""license"\"": "\""BSD-2-Clause"\"",
+  "\""dependencies"\"": {
+    "\""express"\"": "\""~4.13.3"\"",
+    "\""grunt"\"": "\""~0.4.5"\"",
+    "\""grunt-contrib-copy"\"": "\""~0.8.2"\"",
+    "\""grunt-contrib-uglify"\"": "\""~0.11.0"\"",
+    "\""grunt-contrib-watch"\"": "\""^0.6.1"\"",
+    "\""path"\"": "\""~0.12.7"\"",
+    "\""body-parser"\"": "\""~1.14.2"\""
+  }
+}
+" >package.json; npm install express --save; npm install grunt --save; npm install grunt-contrib-copy --save; npm install grunt-contrib-uglify --save; npm install path --save; npm install body-parser --save; npm install express --save; npm install grunt-contrib-watch --save-dev; echo "Things you will need to do for your project to be fully finished:
+
+1.) You will need to change the information inside of your package.json, change the version number, description, and name.  These are all option of course but are recommended.
+2.) You will need to open up a terminal and npm start.
+3.) You will need to open a second terminal and grunt.
+4.) You will need to decide a client frame work if needed (ie angular, jquery)
+5.) If there is any odd issues try running npm update.
+
+Other than that everything should be automated for you.  If there is issues when you try to npm start, it is possible we are using different versions of some software.  If this issue persists then I would recommend removing the package.json portion from your bashrc. I would also recommend every three projects free handing this skeleton so why everything is happening still stays fresh in your memory." >readme; '
