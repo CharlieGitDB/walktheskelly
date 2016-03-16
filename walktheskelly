@@ -1,4 +1,4 @@
-alias walktheskelly='mkdir client; touch client/client.js; mkdir server; mkdir server/public; mkdir server/public/scripts; mkdir server/public/views; mkdir server/public/vendors; mkdir server/public/styles; mkdir server/routes; echo "var express = require("\""express"\"");
+alias walktheskelly='mkdir scripts; touch scripts/main.js; mkdir server; mkdir server/public; mkdir server/public/scripts; mkdir server/public/views; mkdir server/public/vendors; mkdir server/public/styles; mkdir server/routes; echo "var express = require("\""express"\"");
 var router = express.Router();
 var path = require("\""path"\"");
 
@@ -24,7 +24,7 @@ var server = app.listen(3000, function(){
 <head>
   <meta charset="\""UTF-8"\"">
   <title>Document</title>
-  <script src="\""scripts/client.min.js"\""></script>
+  <script src="\""scripts/main.min.js"\""></script>
 </head>
 <body>
 
@@ -35,13 +35,13 @@ var server = app.listen(3000, function(){
         pkg: grunt.file.readJSON("\""package.json"\""),
         uglify: {
             build: {
-                src: "\""client/client.js"\"",
-                dest: "\""server/public/scripts/client.min.js"\""
+                src: "\""scripts/main.js"\"",
+                dest: "\""server/public/scripts/main.min.js"\""
             }
         },
         watch: {
     			scripts: {
-    				files: ["\""client/client.js"\""],
+    				files: ["\""scripts/main.js"\""],
     				tasks: ["\""uglify"\""],
     				options: {
     					spawn: false
